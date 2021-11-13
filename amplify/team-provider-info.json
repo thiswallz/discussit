@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-discussit-dev-203839-authRole",
+      "UnauthRoleArn": "arn:aws:iam::163073989574:role/amplify-discussit-dev-203839-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::163073989574:role/amplify-discussit-dev-203839-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-discussit-dev-203839-deployment",
+      "UnauthRoleName": "amplify-discussit-dev-203839-unauthRole",
+      "StackName": "amplify-discussit-dev-203839",
+      "StackId": "arn:aws:cloudformation:us-east-1:163073989574:stack/amplify-discussit-dev-203839/4fd8ce90-44b9-11ec-8423-127a6f673029",
+      "AmplifyAppId": "d3kx3z5mxng0v4"
+    }
+  }
+}

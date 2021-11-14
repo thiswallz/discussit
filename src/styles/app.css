@@ -2,3 +2,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+:root {
+  --color: rgb(255, 255, 255);
+  --main-color: rgb(1, 110, 218);
+  --secondary-color: rgb(217, 0, 192);
+}

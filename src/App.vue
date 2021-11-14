@@ -1,5 +1,6 @@
 <template>
   <div>
+    <v-button>My Text asddsadsa 2</v-button>
     <h1>Todo App</h1>
     <input type="text" v-model="name" placeholder="Todo name" />
     <input type="text" v-model="description" placeholder="Todo description" />
@@ -24,10 +25,12 @@ import { createTodo, deleteTodo } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
 import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
 import { Todo } from './API';
+import VButton from './components/atoms/VButton/index.vue';
 
 @Options({
   components: {
     HelloWorld,
+    VButton
   },
 })
 export default class App extends Vue {

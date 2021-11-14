@@ -7,6 +7,7 @@
     <div v-for="item in todos" :key="item.id">
       <h3>{{ item.name }}</h3>
       <p>{{ item.description }}</p>
+      <button>delete</button>
     </div>
   </div>
 </template>

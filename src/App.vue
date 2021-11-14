@@ -1,6 +1,24 @@
 <template>
   <div>
-    <v-button type="light">my texts</v-button>
+    <RoadLine :lines="lines">
+      <template v-slot:default="slotProps">
+        <div>My textsssss {{slotProps.title}}</div>
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+        <Diamond />
+      </template>
+    </RoadLine>
     <h1>Todo App</h1>
     <input type="text" v-model="name" placeholder="Todo name" />
     <input type="text" v-model="description" placeholder="Todo description" />
@@ -25,18 +43,25 @@ import { createTodo, deleteTodo } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
 import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
 import { Todo } from './API';
-import VButton from './components/atoms/VButton/index.vue';
+import RoadLine from './components/molecules/RoadLine/index.vue';
+import Diamond from './components/atoms/Diamond/index.vue';
 
 @Options({
   components: {
     HelloWorld,
-    VButton
+    RoadLine,
+    Diamond
   },
 })
 export default class App extends Vue {
   name = '';
   description = '';
   todos: Partial<Todo>[] = [];
+  lines = [
+    {title: 'title 1'},
+    {title: 'title 2'},
+    {title: 'title 3'},
+    ]
 
   mounted() {
     this.getTodos();
@@ -91,14 +116,3 @@ export default class App extends Vue {
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

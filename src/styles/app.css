@@ -12,4 +12,6 @@
   --border-color: rgba(32, 34, 49);
 
   font-size: 18px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: var(--color);
 }

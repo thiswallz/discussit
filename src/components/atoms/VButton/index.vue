@@ -12,6 +12,7 @@ import { Options, Vue } from 'vue-class-component';
 })
 export default class VButton extends Vue {}
 </script>
+
 <style lang="scss" scoped>
 button {
   background: none;

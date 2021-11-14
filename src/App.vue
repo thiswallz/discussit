@@ -1,6 +1,6 @@
 <template>
   <div>
-    <RoadLine :lines="lines">
+    <RoadLine :lines="lines" box-class="flex-auto" @onBoxClick="alert" single-line>
       <template v-slot:default="slotProps">
         <div>My textsssss {{slotProps.title}}</div>
         <Diamond />
@@ -66,6 +66,11 @@ export default class App extends Vue {
   mounted() {
     this.getTodos();
     this.subscribe();
+  }
+
+  alert(data: any){
+    console.log('data', data)
+    alert(2222)
   }
 
   async createTodo() {

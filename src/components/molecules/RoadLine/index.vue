@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div :class="{'flex w-auto': singleLine}">
     <template v-for="(line, index) in lines" :key="index">
-      <box :title="line.title">
+      <box :title="line.title" :customClass="boxClass" @click="$emit('onBoxClick', line)">
         <slot :title="line.title"></slot>
       </box>
     </template>
@@ -17,7 +17,9 @@ export default defineComponent({
     Box
   },
   props: {
-    lines: { type: String, required: false },
+    lines: { type: Object },
+    boxClass: { type: String },
+    singleLine: { type: Boolean, default: false },
   },
 });
 </script>

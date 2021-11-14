@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+   <div >
     <h1>Todo App</h1>
     <input type="text" v-model="name" placeholder="Todo name">
     <input type="text" v-model="description" placeholder="Todo description">
@@ -12,24 +12,32 @@
 </template>
 
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+import HelloWorld from './components/HelloWorld.vue';
 import { API } from 'aws-amplify';
 import { createTodo } from './graphql/mutations';
 import { listTodos } from './graphql/queries';
+import { onCreateTodo } from './graphql/subscriptions';
 
-export default {
-  name: 'App',
-  async created() {
-    this.getTodos();
+@Options({
+  components: {
+    HelloWorld,
   },
-  data() {
-    return {
-      name: '',
-      description: '',
-      todos: []
-    }
-  },
-  methods: {
-    async createTodo() {
+})
+export default class App extends Vue {
+
+      name =  ''
+      description = ''
+      todos: { name: string, description: string }[] = []
+
+      mounted(){
+
+        this.getTodos()
+        this.subscribe()
+
+      }
+
+      async createTodo() {
       const { name, description } = this;
       if (!name || !description) return;
       const todo = { name, description };
@@ -40,13 +48,38 @@ export default {
       });
       this.name = '';
       this.description = '';
-    },
+    }
+
     async getTodos() {
-      const todos = await API.graphql({
+      const todos = await <any>API.graphql({
         query: listTodos
       });
       this.todos = todos.data.listTodos.items;
     }
-  }
+
+    subscribe() {
+      API.graphql({ query: onCreateTodo })
+      //@ts-ignore
+        .subscribe({
+          next: (eventData: any) => {
+            console.log(eventData)
+            let todo = eventData.value.data.onCreateTodo;
+            if (this.todos.some(item => item.name === todo.name)) return; // remove duplications
+            this.todos = [...this.todos, todo];
+          }
+        });
+    }
+
 }
 </script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>

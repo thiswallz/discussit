@@ -12,4 +12,7 @@ applyPolyfills().then(() => {
   defineCustomElements(window);
 });
 
+// Tailwind setup
+import './styles/app.css';
+
 createApp(App).mount('#app')

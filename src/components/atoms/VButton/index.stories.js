@@ -7,9 +7,29 @@ export default {
 
 export const Primary = () => ({
   components: { VButton },
-  template: '<VButton background="#ff0" label="Button" >Ex 1</VButton>',
+  template: '<VButton>Primary</VButton>',
 });
-export const Secondary = () => ({
+
+export const Secondary = (args) => ({
   components: { VButton },
-  template: '<VButton background="#ff0" label="😄👍😍💯" >Ex 2</VButton>',
+  template: '<VButton v-bind="args" >My Text</VButton>',
+  setup() {
+    return { args };
+  }
 });
+
+Secondary.args = {
+  type: 'secondary',
+};
+
+export const Light = (args) => ({
+  components: { VButton },
+  template: '<VButton v-bind="args" >My Text</VButton>',
+  setup() {
+    return { args };
+  }
+});
+
+Light.args = {
+  type: 'light',
+};

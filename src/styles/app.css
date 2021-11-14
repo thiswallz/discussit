@@ -3,10 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
   --color: rgb(255, 255, 255);
   --main-color: rgb(1, 110, 218);
   --secondary-color: rgb(217, 0, 192);
+  --global-color-1: rgb(13, 4, 21);
+  --global-color-2: rgb(27, 33, 82);
   --border-color: rgba(32, 34, 49);
+
+  font-size: 18px;
 }

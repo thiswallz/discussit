@@ -21,3 +21,15 @@ export const Custom = (args) => ({
 Custom.args = {
   color: 'blue',
 };
+
+export const CustomBorder = (args) => ({
+  components: { Diamond },
+  template: '<Diamond v-bind="args" />',
+  setup() {
+    return { args };
+  }
+});
+
+CustomBorder.args = {
+  borderColor: 'red',
+};

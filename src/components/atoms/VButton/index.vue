@@ -1,16 +1,18 @@
 <template>
-  <button v-bind="$attrs">
+  <button v-bind="$attrs" :class="[type ? `type--${type}` : '']">
     <slot></slot>
   </button>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { defineComponent } from 'vue';
 
-@Options({
+export default defineComponent({
   inheritAttrs: false,
-})
-export default class VButton extends Vue {}
+  props: {
+    type: { type: String, required: false },
+  },
+});
 </script>
 
 <style lang="scss" scoped>
@@ -32,6 +34,29 @@ button {
       var(--secondary-color),
       var(--main-color)
     );
+  }
+  &.type--secondary {
+    border: 3px double transparent;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)),
+      radial-gradient(
+        circle at left top,
+        var(--main-color),
+        var(--secondary-color)
+      );
+    &:hover {
+      background-image: linear-gradient(rgb(13, 14, 33), rgb(13, 14, 33)),
+        radial-gradient(
+          circle at left top,
+          var(--secondary-color),
+          var(--main-color)
+        );
+    }
+  }
+  &.type--light {
+    background-image: none;
+    @apply bg-gray-600;
   }
 }
 </style>

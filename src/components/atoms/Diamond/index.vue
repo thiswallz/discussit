@@ -1,5 +1,5 @@
 <template>
-  <div class="diamond" :style="{ background: color }">
+  <div class="diamond" :style="{ background: color, borderColor }">
   </div>
 </template>
 
@@ -9,6 +9,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   props: {
     color: { type: String, required: false },
+    borderColor: { type: String, required: false },
   }
 })
 </script>

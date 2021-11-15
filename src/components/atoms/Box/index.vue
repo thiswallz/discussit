@@ -3,7 +3,7 @@
     <div class="absolute top-10">
       {{title}}
     </div>
-    <div class="box--content mt-20 mb-2">
+    <div class="box--content mt-20 mb-2 w-full">
       <slot></slot>
     </div>
   </div>

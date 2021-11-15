@@ -1,7 +1,7 @@
 <template>
   <div class="circle w-28 h-28 justify-center flex items-center" :class="customClass" :style="{ width, height }">
     <span class="absolute w-8 h-8 top-4"><img :src="iconSrc" /></span>
-    <span class="inline-block align-middle" :class="{ 'mt-5': iconSrc }">
+    <span class="inline-block align-middle text-center" :class="{ 'mt-5': iconSrc }">
       <slot></slot>
     </span>
   </div>

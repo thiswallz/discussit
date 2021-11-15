@@ -1,5 +1,5 @@
 <template>
-  <div :class="customClass" class="justify-center flex items-center relative box" >
+  <div :class="customClass" class=" justify-center flex items-center relative box" >
     <div class="absolute top-10">
       {{title}}
     </div>
@@ -15,7 +15,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   props: {
     title: { type: String, required: false },
-    customClass: { type: String, required: false, default: 'w-auto h-auto' },
+    customClass: { type: String, required: false, default: 'w-full' },
   },
 });
 </script>

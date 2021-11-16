@@ -1,5 +1,58 @@
-type Todo @model {
+type Template @model {
+    id: ID!
+    name: String!
+    statuses: [Status] @connection(keyName: "byTemplate", fields: ["id"])
+    elements: [Element] @connection(keyName: "byElement", fields: ["id"])
+}
+
+type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
+  id: ID!
+  templateId: ID!
+  template: Template @connection(fields: ["templateId"])
+  color: String!
+  order: Number!
+}
+
+type Element @model @key(name: "byElement", fields: ["templateId"]) {
+  id: ID!
+  templateId: ID!
+  template: Template @connection(fields: ["templateId"])
+  title: String!
+  order: Number!
+}
+
+type Team @model {
   id: ID!
   name: String!
-  description: String
+  members: [Member] @connection(keyName: "byMember", fields: ["id"])
 }
+
+type Member @model @key(name: "byMember", fields: ["teamId"]) {
+  id: ID!
+  teamId: ID!
+  team: Team @connection(fields: ["teamId"])
+  name: String!
+}
+
+type ElementDiscussed @model {
+  id: ID!
+  element: Element!
+  discussion: Discussion!
+  text: String!
+}
+
+type Discussion @model {
+  id: ID!
+  title: String!
+  priority: String!
+  status: Status!
+  team: Team!
+  template: Template!
+  labels: String[]
+  owners: String[]
+  checklist: String[]
+  peopleInvolved: String[]
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
+}
+

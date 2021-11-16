@@ -10,7 +10,7 @@ type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
   templateId: ID!
   template: Template @connection(fields: ["templateId"])
   color: [String!]!
-  order: Number!
+  order: Int!
 }
 
 type Element @model @key(name: "byElement", fields: ["templateId"]) {
@@ -18,7 +18,7 @@ type Element @model @key(name: "byElement", fields: ["templateId"]) {
   templateId: ID!
   template: Template @connection(fields: ["templateId"])
   title: String!
-  order: Number!
+  order: Int!
 }
 
 type Team @model {

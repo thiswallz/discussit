@@ -9,7 +9,7 @@ type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
   id: ID!
   templateId: ID!
   template: Template @connection(fields: ["templateId"])
-  color: String!
+  color: [String!]!
   order: Number!
 }
 
@@ -48,10 +48,10 @@ type Discussion @model {
   status: Status!
   team: Team!
   template: Template!
-  labels: String[]
-  owners: String[]
-  checklist: String[]
-  peopleInvolved: String[]
+  labels: [String]
+  owners: [String]
+  checklist: [String]
+  peopleInvolved: [String]
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
 }

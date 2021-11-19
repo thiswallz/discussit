@@ -2,47 +2,80 @@
   <div>
     <div class="justify-center flex bg-yellow-300 items-center h-screen">
       <div class="text-4xlk absolute top-5 left-5">Hello 👋🏼</div>
-
       <statuses-bar :statuses="statuses" @select="alert"></statuses-bar>
-      
     </div>
+    <powered-list class="absolute bottom-0 -right-24 scale-50 transform "></powered-list>
+    <a target="_blank" href="https://github.com/thiswallz/discussit" class="absolute bottom-1 left-1 w-14"><img src="@/assets/forkme.png" title="fork-me at github"/></a>
   </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-//import { API } from 'aws-amplify';
+import { computed, Ref, ref, watch } from 'vue';
+import { API } from 'aws-amplify';
+import { listStatuss, listTemplates } from './graphql/queries';
 //import { createTodo, deleteTodo } from './graphql/mutations';
 //import { listTodos } from './graphql/queries';
 //import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
 //import { Todo } from './API';
 import StatusesBar from './components/organisms/StatusesBar/index.vue';
+import PoweredList from './components/organisms/PoweredList/index.vue';
+import { Template, Status } from './API';
 
-@Options({
-  components: {
-    StatusesBar,
+export default {
+  components: { StatusesBar, PoweredList },
+  setup() {
+    let templates: Ref<Template[]> = ref([]);
+    let statuses: Ref<Status[]> = ref([]);
+    let selectedTemplate: Ref<Template | undefined> = ref(undefined);
+    const defaultTemplate = computed((): Template | undefined =>
+      templates.value.find((template) => template.isDefault)
+    );
+
+    const loadTemplates = async () => {
+      const result = await <any>API.graphql({
+        query: listTemplates,
+      });
+      templates.value = result.data.listTemplates.items;
+    };
+    loadTemplates();
+
+    watch(templates, () => {
+      if (!selectedTemplate.value && defaultTemplate.value) {
+        selectedTemplate.value = defaultTemplate.value;
+      }
+    });
+
+    watch(selectedTemplate, async (newVal?: Template) => {
+      const templateId = newVal ? newVal?.id : defaultTemplate?.value?.id;
+      if (templateId) {
+        const response = await <any>API.graphql({
+          query: listStatuss,
+          variables: {
+            filter: {
+              templateId: {
+                eq: templateId,
+              },
+            },
+          },
+        });
+        console.log('selected', statuses);
+        statuses.value = response.data.listStatuss.items;
+      }
+    });
+
+    return {
+      templates,
+      statuses,
+      selectedTemplate,
+      defaultTemplate,
+    };
   },
-})
-export default class App extends Vue {
-  name = '';
-  description = '';
-  //todos: Partial<Todo>[] = [];
+};
 
-  mounted() {
-    this.getTodos();
-    this.subscribe();
-  }
-
-  get statuses(){
-    return [{ title: 'title 1' }, { title: 'title 2' }, { title: 'title 3' }] 
-  }
-
-  alert(data: any) {
-    console.log('data', data);
-  }
+/*
+class App extends Vue {
 
   async createTodo() {
-    /*
     const { name, description } = this;
     if (!name || !description) return;
     const todo = { name, description };
@@ -52,29 +85,16 @@ export default class App extends Vue {
     });
     this.name = '';
     this.description = '';
-    */
-  }
-
-  async getTodos() {
-    /*
-    const todos = await <any>API.graphql({
-      query: listTodos,
-    });
-    this.todos = todos.data.listTodos.items;
-    */
   }
 
   deleteItem() {
-    /*
     API.graphql({
       query: deleteTodo,
       variables: { input: { id: item.id } },
     });
-    */
   }
 
   subscribe() {
-    /*
     API.graphql({ query: onCreateTodo })
       //@ts-ignore
       .subscribe({
@@ -93,7 +113,44 @@ export default class App extends Vue {
           this.todos = this.todos.filter((item) => todo.id !== item.id);
         },
       });
-      */
+
+
+
+    watch(
+      () => this.templates,
+      (templates: Template[], other) => {
+        console.log('watcher templates: ', templates);
+        console.log('watcher other: ', other);
+        if (!this.selectedTemplate) {
+          this.selectedTemplate = this.defaultTemplate;
+        }
+      }
+    );
+
+    watch(
+      () => this.selectedTemplate,
+      async (selectedTemplate?: Template) => {
+        const templateId = selectedTemplate
+          ? selectedTemplate.id
+          : this.defaultTemplate?.id;
+          console.log('selecting:::::::: ', templateId)
+        if (templateId) {
+          const statuses = await API.graphql({
+            query: listStatuss,
+            variables: {
+              filter: {
+                templateId: {
+                  eq: templateId,
+                },
+              },
+            },
+          });
+          console.log('selected', statuses);
+          //this.statuses = statuses;
+        }
+      }
+    );
   }
 }
+    */
 </script>

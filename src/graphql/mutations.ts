@@ -10,10 +10,12 @@ export const createTemplate = /* GraphQL */ `
     createTemplate(input: $input, condition: $condition) {
       id
       name
+      isDefault
       statuses {
         items {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -45,10 +47,12 @@ export const updateTemplate = /* GraphQL */ `
     updateTemplate(input: $input, condition: $condition) {
       id
       name
+      isDefault
       statuses {
         items {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -80,10 +84,12 @@ export const deleteTemplate = /* GraphQL */ `
     deleteTemplate(input: $input, condition: $condition) {
       id
       name
+      isDefault
       statuses {
         items {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -118,6 +124,7 @@ export const createStatus = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -127,6 +134,7 @@ export const createStatus = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       color
       order
       createdAt
@@ -145,6 +153,7 @@ export const updateStatus = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -154,6 +163,7 @@ export const updateStatus = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       color
       order
       createdAt
@@ -172,6 +182,7 @@ export const deleteStatus = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -181,6 +192,7 @@ export const deleteStatus = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       color
       order
       createdAt
@@ -199,6 +211,7 @@ export const createElement = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -226,6 +239,7 @@ export const updateElement = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -253,6 +267,7 @@ export const deleteElement = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -420,6 +435,7 @@ export const createElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -435,6 +451,7 @@ export const createElementDiscussed = /* GraphQL */ `
         status {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -449,6 +466,7 @@ export const createElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -480,6 +498,7 @@ export const updateElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -495,6 +514,7 @@ export const updateElementDiscussed = /* GraphQL */ `
         status {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -509,6 +529,7 @@ export const updateElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -540,6 +561,7 @@ export const deleteElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -555,6 +577,7 @@ export const deleteElementDiscussed = /* GraphQL */ `
         status {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -569,6 +592,7 @@ export const deleteElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -602,9 +626,11 @@ export const createDiscussion = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
+        title
         color
         order
         createdAt
@@ -622,6 +648,7 @@ export const createDiscussion = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -657,9 +684,11 @@ export const updateDiscussion = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
+        title
         color
         order
         createdAt
@@ -677,6 +706,7 @@ export const updateDiscussion = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -712,9 +742,11 @@ export const deleteDiscussion = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
+        title
         color
         order
         createdAt
@@ -732,6 +764,7 @@ export const deleteDiscussion = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }

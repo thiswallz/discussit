@@ -7,10 +7,12 @@ export const getTemplate = /* GraphQL */ `
     getTemplate(id: $id) {
       id
       name
+      isDefault
       statuses {
         items {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -44,6 +46,7 @@ export const listTemplates = /* GraphQL */ `
       items {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -65,6 +68,7 @@ export const getStatus = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -74,6 +78,7 @@ export const getStatus = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      title
       color
       order
       createdAt
@@ -94,9 +99,11 @@ export const listStatuss = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
+        title
         color
         order
         createdAt
@@ -114,6 +121,7 @@ export const getElement = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -143,6 +151,7 @@ export const listElements = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -249,6 +258,7 @@ export const getElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -264,6 +274,7 @@ export const getElementDiscussed = /* GraphQL */ `
         status {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -278,6 +289,7 @@ export const getElementDiscussed = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
@@ -350,9 +362,11 @@ export const getDiscussion = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }
+        title
         color
         order
         createdAt
@@ -370,6 +384,7 @@ export const getDiscussion = /* GraphQL */ `
       template {
         id
         name
+        isDefault
         statuses {
           nextToken
         }
@@ -404,6 +419,7 @@ export const listDiscussions = /* GraphQL */ `
         status {
           id
           templateId
+          title
           color
           order
           createdAt
@@ -418,6 +434,7 @@ export const listDiscussions = /* GraphQL */ `
         template {
           id
           name
+          isDefault
           createdAt
           updatedAt
         }

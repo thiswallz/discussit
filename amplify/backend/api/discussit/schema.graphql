@@ -1,6 +1,7 @@
 type Template @model {
     id: ID!
     name: String!
+    isDefault: Boolean!
     statuses: [Status] @connection(keyName: "byTemplate", fields: ["id"])
     elements: [Element] @connection(keyName: "byElement", fields: ["id"])
 }

@@ -1,79 +1,48 @@
 <template>
   <div>
-    <RoadLine :lines="lines" box-class="flex-auto" @onBoxClick="alert" single-line>
-      <template v-slot:default="slotProps">
-        <div>My textsssss {{slotProps.title}}</div>
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-      </template>
-    </RoadLine>
-    <h1>Todo App</h1>
-    <input type="text" v-model="name" placeholder="Todo name" />
-    <input type="text" v-model="description" placeholder="Todo description" />
-    <button v-on:click="createTodo">Create Todo</button>
-    <div v-for="item in todos" :key="item.id">
-      <h3>{{ item.name }}</h3>
-      <p>{{ item.description }}</p>
-      <button v-on:click="deleteItem(item)">delete</button>
-    </div>
-
     <div class="justify-center flex bg-yellow-300 items-center h-screen">
-      <div class="text-4xl">Hello 👋🏼</div>
+      <div class="text-4xlk absolute top-5 left-5">Hello 👋🏼</div>
+
+      <statuses-bar :statuses="statuses" @select="alert"></statuses-bar>
+      
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
-import HelloWorld from './components/HelloWorld.vue';
-import { API } from 'aws-amplify';
-import { createTodo, deleteTodo } from './graphql/mutations';
-import { listTodos } from './graphql/queries';
-import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
-import { Todo } from './API';
-import RoadLine from './components/molecules/RoadLine/index.vue';
-import Diamond from './components/atoms/Diamond/index.vue';
+//import { API } from 'aws-amplify';
+//import { createTodo, deleteTodo } from './graphql/mutations';
+//import { listTodos } from './graphql/queries';
+//import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
+//import { Todo } from './API';
+import StatusesBar from './components/organisms/StatusesBar/index.vue';
 
 @Options({
   components: {
-    HelloWorld,
-    RoadLine,
-    Diamond
+    StatusesBar,
   },
 })
 export default class App extends Vue {
   name = '';
   description = '';
-  todos: Partial<Todo>[] = [];
-  lines = [
-    {title: 'title 1'},
-    {title: 'title 2'},
-    {title: 'title 3'},
-    ]
+  //todos: Partial<Todo>[] = [];
 
   mounted() {
     this.getTodos();
     this.subscribe();
   }
 
-  alert(data: any){
-    console.log('data', data)
-    alert(2222)
+  get statuses(){
+    return [{ title: 'title 1' }, { title: 'title 2' }, { title: 'title 3' }] 
+  }
+
+  alert(data: any) {
+    console.log('data', data);
   }
 
   async createTodo() {
+    /*
     const { name, description } = this;
     if (!name || !description) return;
     const todo = { name, description };
@@ -83,23 +52,29 @@ export default class App extends Vue {
     });
     this.name = '';
     this.description = '';
+    */
   }
 
   async getTodos() {
+    /*
     const todos = await <any>API.graphql({
       query: listTodos,
     });
     this.todos = todos.data.listTodos.items;
+    */
   }
 
-  deleteItem(item: Todo) {
+  deleteItem() {
+    /*
     API.graphql({
       query: deleteTodo,
       variables: { input: { id: item.id } },
     });
+    */
   }
 
   subscribe() {
+    /*
     API.graphql({ query: onCreateTodo })
       //@ts-ignore
       .subscribe({
@@ -118,6 +93,7 @@ export default class App extends Vue {
           this.todos = this.todos.filter((item) => todo.id !== item.id);
         },
       });
+      */
   }
 }
 </script>

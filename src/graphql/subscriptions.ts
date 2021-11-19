@@ -408,6 +408,8 @@ export const onCreateElementDiscussed = /* GraphQL */ `
         owners
         checklist
         peopleInvolved
+        dateProposed
+        dateProposedGranularity
         createdAt
         updatedAt
       }
@@ -463,6 +465,8 @@ export const onUpdateElementDiscussed = /* GraphQL */ `
         owners
         checklist
         peopleInvolved
+        dateProposed
+        dateProposedGranularity
         createdAt
         updatedAt
       }
@@ -518,6 +522,8 @@ export const onDeleteElementDiscussed = /* GraphQL */ `
         owners
         checklist
         peopleInvolved
+        dateProposed
+        dateProposedGranularity
         createdAt
         updatedAt
       }
@@ -572,6 +578,8 @@ export const onCreateDiscussion = /* GraphQL */ `
       owners
       checklist
       peopleInvolved
+      dateProposed
+      dateProposedGranularity
       createdAt
       updatedAt
     }
@@ -622,6 +630,8 @@ export const onUpdateDiscussion = /* GraphQL */ `
       owners
       checklist
       peopleInvolved
+      dateProposed
+      dateProposedGranularity
       createdAt
       updatedAt
     }
@@ -672,6 +682,8 @@ export const onDeleteDiscussion = /* GraphQL */ `
       owners
       checklist
       peopleInvolved
+      dateProposed
+      dateProposedGranularity
       createdAt
       updatedAt
     }

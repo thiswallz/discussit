@@ -9,9 +9,10 @@
   --secondary-color: rgb(217, 0, 192);
   --global-color-1: rgb(13, 4, 21);
   --global-color-2: rgb(27, 33, 82);
+  --global-color-3: rgba(32,34,49);
   --border-color: rgba(32, 34, 49);
 
   font-size: 18px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  @apply font-sans;
   color: var(--color);
 }

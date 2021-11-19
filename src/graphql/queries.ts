@@ -285,6 +285,8 @@ export const getElementDiscussed = /* GraphQL */ `
         owners
         checklist
         peopleInvolved
+        dateProposed
+        dateProposedGranularity
         createdAt
         updatedAt
       }
@@ -323,6 +325,8 @@ export const listElementDiscusseds = /* GraphQL */ `
           owners
           checklist
           peopleInvolved
+          dateProposed
+          dateProposedGranularity
           createdAt
           updatedAt
         }
@@ -379,6 +383,8 @@ export const getDiscussion = /* GraphQL */ `
       owners
       checklist
       peopleInvolved
+      dateProposed
+      dateProposedGranularity
       createdAt
       updatedAt
     }
@@ -419,6 +425,8 @@ export const listDiscussions = /* GraphQL */ `
         owners
         checklist
         peopleInvolved
+        dateProposed
+        dateProposedGranularity
         createdAt
         updatedAt
       }

@@ -9,7 +9,8 @@ type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
   id: ID!
   templateId: ID!
   template: Template @connection(fields: ["templateId"])
-  color: [String!]!
+  title: String!
+  color: String!
   order: Int!
 }
 

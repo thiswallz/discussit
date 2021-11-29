@@ -17,6 +17,7 @@ export const createTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -54,6 +55,7 @@ export const updateTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -91,6 +93,7 @@ export const deleteTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -136,6 +139,7 @@ export const createStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -165,6 +169,7 @@ export const updateStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -194,6 +199,7 @@ export const deleteStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -453,6 +459,7 @@ export const createElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -516,6 +523,7 @@ export const updateElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -579,6 +587,7 @@ export const deleteElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -632,6 +641,7 @@ export const createDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -690,6 +700,7 @@ export const updateDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -748,6 +759,7 @@ export const deleteDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt

@@ -12,6 +12,10 @@
   },
   "dependencies": {
     "@aws-amplify/ui-components": "^1.9.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/vue-fontawesome": "^3.0.0-5",
+    "@vueup/vue-quill": "^1.0.0-beta.7",
     "aws-amplify": "^4.3.6",
     "core-js": "^3.6.5",
     "vue": "^3.0.0",

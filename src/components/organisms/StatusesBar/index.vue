@@ -1,11 +1,15 @@
 <template>
-  <div>
     <RoadLine
       :lines="statuses"
-      box-class="flex-auto"
+      :box-classes="['flex-1']"
+      class="w-full pl-5 pr-5"
       @onBoxClick="(line) => $emit('select', line)"
       single-line
     >
+    <template #header="{ item }">
+      <font-awesome-icon :icon="item.icon" class="absolute top-5 left-1/2 transform -translate-x-1/2" />
+      {{item.title}}
+    </template>
       <template v-slot:default="slotProps">
         <div>My textsssss {{ slotProps.title }}</div>
         <Diamond />
@@ -15,16 +19,8 @@
         <Diamond />
         <Diamond />
         <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
       </template>
     </RoadLine>
-  </div>
 </template>
 
 <script lang="ts">
@@ -38,7 +34,7 @@ export default defineComponent({
     Diamond,
   },
   props: {
-    statuses: { type: Object },
+    statuses: { type: Array },
   }
 });
 </script>

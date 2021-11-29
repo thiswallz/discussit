@@ -14,6 +14,7 @@ export const getTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -80,6 +81,7 @@ export const getStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -105,6 +107,7 @@ export const listStatuss = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -276,6 +279,7 @@ export const getElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -368,6 +372,7 @@ export const getDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -421,6 +426,7 @@ export const listDiscussions = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt

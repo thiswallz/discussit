@@ -1,7 +1,10 @@
 <template>
-  <div class="circle w-28 h-28 justify-center flex items-center" :class="customClass" :style="{ width, height }">
+  <div :class="dynamicClasses" :style="{ width, height }">
     <span class="absolute w-8 h-8 top-4"><img :src="iconSrc" /></span>
-    <span class="inline-block align-middle text-center" :class="{ 'mt-5': iconSrc }">
+    <span
+      class="inline-block align-middle text-center"
+      :class="{ 'mt-5': iconSrc }"
+    >
       <slot></slot>
     </span>
   </div>
@@ -14,8 +17,22 @@ export default defineComponent({
   props: {
     width: { type: String, required: false },
     height: { type: String, required: false },
-    customClass: { type: String, required: false, default: 'bg-gradient-default' },
+    customClasses: { type: Array, required: false, default: () => ['bg-gradient-default'] },
     iconSrc: { type: String, required: false },
+  },
+  computed: {
+    dynamicClasses() {
+      const classes = [
+        'circle',
+        'w-28',
+        'h-28',
+        'justify-center',
+        'flex',
+        'items-center',
+      ];
+
+      return [...classes, ...this.customClasses];
+    },
   },
 });
 </script>
@@ -30,15 +47,15 @@ export default defineComponent({
   box-shadow: var(--tw-ring-offset-shadow, 0 0 transparent),
     var(--tw-ring-shadow, 0 0 transparent), var(--tw-shadow) !important;
   border-radius: 9999px !important;
-  &>span{
+  & > span {
     color: var(--color);
   }
 }
-.bg-gradient-default{
+.bg-gradient-default {
   background-image: linear-gradient(
     224.43deg,
-    var(--global-color-1) -16.69%,
-    var(--global-color-2) 86.36%
+    var(--global-color-1) -36.69%,
+    var(--global-color-2) 116.36%
   );
 }
 </style>

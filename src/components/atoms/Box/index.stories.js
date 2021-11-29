@@ -53,5 +53,5 @@ export const CustomClass = (args) => ({
 });
 
 CustomClass.args = {
-  customClass: 'w-28 h-28',
+  customClasses: ['w-28', 'h-28'],
 };

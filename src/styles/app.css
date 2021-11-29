@@ -9,10 +9,22 @@
   --secondary-color: rgb(217, 0, 192);
   --global-color-1: rgb(13, 4, 21);
   --global-color-2: rgb(27, 33, 82);
-  --global-color-3: rgba(32,34,49);
+  --global-color-3: rgba(32, 34, 49);
   --border-color: rgba(32, 34, 49);
 
   font-size: 18px;
   @apply font-sans;
   color: var(--color);
+}
+
+body {
+  background-color: #161522;
+  background-image: linear-gradient(
+    224.43deg,
+    var(--secondary-color) -196.69%,
+    #161522 86.36%
+  );
+  background-position: center top;
+  background-size: 100% auto;
+  height: 100vh;
 }

@@ -39,7 +39,7 @@ export const CustomCss = (args) => ({
 
 CustomCss.args = {
   title: 'Example of a title',
-  customClass: 'rounded-full',
+  customClasses: ['rounded-full'],
   subtitle: 'My subtitle ......',
 };
 
@@ -53,7 +53,7 @@ export const CustomContent = (args) => ({
 
 CustomContent.args = {
   title: 'Example of a title',
-  customClass: 'rounded',
+  customClasses: ['rounded'],
   subtitle: 'My subtitle ......',
 };
 
@@ -67,7 +67,6 @@ export const Small = (args) => ({
 
 Small.args = {
   title: 'Example of a title',
-  customClass: 'rounded',
   subtitle: 'My subtitle ......',
   size: 'small',
   clickable: true
@@ -83,7 +82,6 @@ export const Medium = (args) => ({
 
 Medium.args = {
   title: 'Example of a title',
-  customClass: 'rounded',
   subtitle: 'My subtitle ......',
   size: 'medium',
 };

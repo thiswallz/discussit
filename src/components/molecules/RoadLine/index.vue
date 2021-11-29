@@ -1,15 +1,16 @@
 <template>
   <div :class="{ 'flex w-auto single-line': singleLine, 'mt-10': $slots.header }" class="road-line">
-    <template v-for="(line, index) in lines" :key="index">
+    <template v-for="(item, index) in lines" :key="index">
       <box
-        :title="$slots.header ? null : line.title"
-        :customClass="boxClass"
-        @click="$emit('onBoxClick', line)"
+        :title="$slots.header ? null : item.title"
+        :custom-classes="boxClasses"
+        :selected="indexSelected === index"
+        @click="() => select(item, index)"
       >
-        <v-circle v-if="$slots.header" class="-top-10" :icon-src="line.ico">
-          <slot name="header" :title="line.title"></slot>
+        <v-circle v-if="$slots.header" class="-top-10" :icon-src="item.ico">
+          <slot name="header" :item="item"></slot>
         </v-circle>
-        <slot :title="line.title"></slot>
+        <slot :item="item"></slot>
       </box>
     </template>
   </div>
@@ -27,9 +28,20 @@ export default defineComponent({
   },
   props: {
     lines: { type: Object },
-    boxClass: { type: String },
+    boxClasses: { type: Array },
     singleLine: { type: Boolean, default: false },
   },
+  data() {
+    return {
+      indexSelected: 0
+    }
+  },
+  methods: {
+    select(item: any, index: number){
+      this.indexSelected = index
+      this.$emit('onBoxClick', item)
+    }
+  }
 });
 </script>
 

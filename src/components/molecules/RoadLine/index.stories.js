@@ -68,16 +68,16 @@ export const CustomBoxClass = (args) => ({
 CustomBoxClass.args = {
   lines,
   singleLine: true,
-  boxClass: 'flex-auto'
+  boxClasses: ['flex-auto']
 };
 
 export const WithHeader  = (args) => ({
   components: { RoadLine },
   template: `<RoadLine v-bind="args">
-    <template v-slot:header="slotProps">
+    <template #header="slotProps">
       {{slotProps.title}}
     </template>
-    <template v-slot:default="slotProps">
+    <template #default="slotProps">
       <div style="height: 25px; width: 25px; background-color: #bbb; border-radius: 50%; "></div>
       <div style="height: 25px; width: 25px; background-color: #bbb; border-radius: 50%; "></div>
       <div style="height: 25px; width: 25px; background-color: #bbb; border-radius: 50%; "></div>
@@ -98,7 +98,7 @@ export const WithHeader  = (args) => ({
 WithHeader.args = {
   lines,
   singleLine: true,
-  boxClass: 'flex-auto'
+  boxClasses: ['flex-auto', 'border-yellow-600', 'border-2', 'rounded-md']
 };
 
 

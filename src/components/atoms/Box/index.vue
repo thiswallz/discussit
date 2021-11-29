@@ -1,5 +1,7 @@
 <template>
-  <div :class="customClass" class=" justify-center flex items-center relative box" >
+  <div 
+    :class="dynamicClasses" 
+    class=" justify-center flex items-center relative box" >
     <div class="absolute top-10">
       {{title}}
     </div>
@@ -15,8 +17,15 @@ import { defineComponent } from 'vue';
 export default defineComponent({
   props: {
     title: { type: String, required: false },
-    customClass: { type: String, required: false, default: 'w-full' },
+    customClasses: { type: Array, required: false, default: ()=>['w-full'] },
+    selected: { type: Boolean, required: false },
   },
+  computed: {
+    dynamicClasses(){
+      const classes = [this.selected ? 'selected' : '']
+      return [ ...classes, ...this.customClasses]
+    }
+  }
 });
 </script>
 
@@ -34,6 +43,9 @@ export default defineComponent({
       var(--global-color-1) -16.69%,
       var(--global-color-2) 86.36%
     );
+  }
+  &.selected{
+     background-color: var(--global-color-2);
   }
 }
 </style>

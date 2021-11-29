@@ -1,28 +1,35 @@
 <template>
-  <div>
-    <div class="justify-center flex bg-yellow-300 items-center h-screen">
-      <div class="text-4xlk absolute top-5 left-5">Hello 👋🏼</div>
-      <statuses-bar :statuses="statuses" @select="alert"></statuses-bar>
+  <div class="text-4xlk absolute top-3 left-5">Hello 👋🏼</div>
+  <div class="mt-3 grid grid-flow-row grid-cols-1">
+    <div class="">
+      <statuses-bar :statuses="statuses" @select="select"></statuses-bar>
     </div>
-    <powered-list class="absolute bottom-0 -right-24 scale-50 transform "></powered-list>
-    <a target="_blank" href="https://github.com/thiswallz/discussit" class="absolute bottom-1 left-1 w-14"><img src="@/assets/forkme.png" title="fork-me at github"/></a>
+    <div>
+      <rich-text class=""></rich-text>
+    </div>
   </div>
+  <powered-list
+    class="absolute bottom-0 -right-24 scale-50 transform"
+  ></powered-list>
+  <a
+    target="_blank"
+    href="https://github.com/thiswallz/discussit"
+    class="absolute bottom-1 left-1 w-14"
+    ><img src="@/assets/forkme.png" title="fork-me at github"
+  /></a>
 </template>
 
 <script lang="ts">
 import { computed, Ref, ref, watch } from 'vue';
 import { API } from 'aws-amplify';
 import { listStatuss, listTemplates } from './graphql/queries';
-//import { createTodo, deleteTodo } from './graphql/mutations';
-//import { listTodos } from './graphql/queries';
-//import { onCreateTodo, onDeleteTodo } from './graphql/subscriptions';
-//import { Todo } from './API';
 import StatusesBar from './components/organisms/StatusesBar/index.vue';
 import PoweredList from './components/organisms/PoweredList/index.vue';
+import RichText from './components/molecules/RichText/index.vue';
 import { Template, Status } from './API';
 
 export default {
-  components: { StatusesBar, PoweredList },
+  components: { StatusesBar, PoweredList, RichText },
   setup() {
     let templates: Ref<Template[]> = ref([]);
     let statuses: Ref<Status[]> = ref([]);
@@ -58,16 +65,20 @@ export default {
             },
           },
         });
-        console.log('selected', statuses);
         statuses.value = response.data.listStatuss.items;
       }
     });
+
+    const select = (status: Status) => {
+      console.log('selectedd>>> ', status);
+    };
 
     return {
       templates,
       statuses,
       selectedTemplate,
       defaultTemplate,
+      select,
     };
   },
 };

@@ -33,3 +33,15 @@ export const CustomBorder = (args) => ({
 CustomBorder.args = {
   borderColor: 'red',
 };
+
+export const CustomClass = (args) => ({
+  components: { Diamond },
+  template: '<Diamond v-bind="args" />',
+  setup() {
+    return { args };
+  }
+});
+
+CustomClass.args = {
+  customClasses: ['h-20', 'w-20'],
+};

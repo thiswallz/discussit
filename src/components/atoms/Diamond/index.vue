@@ -1,5 +1,5 @@
 <template>
-  <div class="diamond" :style="{ background: color, borderColor }">
+  <div class="diamond" :style="{ background: color, borderColor }" :class="dynamicClasses">
   </div>
 </template>
 
@@ -10,14 +10,19 @@ export default defineComponent({
   props: {
     color: { type: String, required: false },
     borderColor: { type: String, required: false },
+    customClasses: { type: Array, required: false, default: ()=>[] },
+  },
+  computed: {
+    dynamicClasses(){
+      const classes = ['w-5', 'h-5']
+      return [ ...classes, ...this.customClasses]
+    }
   }
 })
 </script>
 
 <style lang="scss" scoped>
 .diamond{
-  width: 15px;
-  height: 15px;
   border: 2px solid var(--border-color);
   background: var(--secondary-color);
   -webkit-transform: rotate(45deg) skew(15deg, 15deg);

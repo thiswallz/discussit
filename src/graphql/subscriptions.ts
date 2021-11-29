@@ -14,6 +14,7 @@ export const onCreateTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -48,6 +49,7 @@ export const onUpdateTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -82,6 +84,7 @@ export const onDeleteTemplate = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -124,6 +127,7 @@ export const onCreateStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -150,6 +154,7 @@ export const onUpdateStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -176,6 +181,7 @@ export const onDeleteStatus = /* GraphQL */ `
       }
       title
       color
+      icon
       order
       createdAt
       updatedAt
@@ -405,6 +411,7 @@ export const onCreateElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -465,6 +472,7 @@ export const onUpdateElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -525,6 +533,7 @@ export const onDeleteElementDiscussed = /* GraphQL */ `
           templateId
           title
           color
+          icon
           order
           createdAt
           updatedAt
@@ -575,6 +584,7 @@ export const onCreateDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -630,6 +640,7 @@ export const onUpdateDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt
@@ -685,6 +696,7 @@ export const onDeleteDiscussion = /* GraphQL */ `
         }
         title
         color
+        icon
         order
         createdAt
         updatedAt

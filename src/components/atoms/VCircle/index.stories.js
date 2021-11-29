@@ -20,7 +20,7 @@ export const CustomSize = (args) => ({
   template: '<VCircle v-bind="args" >My text</VCircle',
   setup() {
     return { args };
-  }
+  },
 });
 
 CustomSize.args = {
@@ -28,16 +28,21 @@ CustomSize.args = {
   height: '120px',
 };
 
-export const CustomClass= (args) => ({
+export const CustomClass = (args) => ({
   components: { VCircle },
   template: '<VCircle v-bind="args" >My text</VCircle>',
   setup() {
     return { args };
-  }
+  },
 });
 
 CustomClass.args = {
-  customClass: 'bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500',
+  customClasses: [
+    'bg-gradient-to-r',
+    'from-yellow-400',
+    'via-red-500',
+    'to-pink-500',
+  ],
 };
 
 export const WidthIcon = (args) => ({
@@ -45,10 +50,10 @@ export const WidthIcon = (args) => ({
   template: '<VCircle v-bind="args" >My text</VCircle>',
   setup() {
     return { args };
-  }
+  },
 });
 
 WidthIcon.args = {
-  iconSrc: 'https://raw.githubusercontent.com/sushiswap/sushi-content/master/products/xsushi.png',
+  iconSrc:
+    'https://raw.githubusercontent.com/sushiswap/sushi-content/master/products/xsushi.png',
 };
-

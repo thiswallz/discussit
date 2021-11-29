@@ -310,6 +310,7 @@ export type DeleteMemberInput = {
 
 export type CreateElementDiscussedInput = {
   id?: string | null,
+  elementId: string,
   discussionId: string,
   text: string,
   createdAt?: string | null,
@@ -317,6 +318,7 @@ export type CreateElementDiscussedInput = {
 };
 
 export type ModelElementDiscussedConditionInput = {
+  elementId?: ModelIDInput | null,
   discussionId?: ModelIDInput | null,
   text?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -329,7 +331,8 @@ export type ModelElementDiscussedConditionInput = {
 export type ElementDiscussed = {
   __typename: "ElementDiscussed",
   id: string,
-  element: Element,
+  elementId: string,
+  element?: Element | null,
   discussionId: string,
   discussion?: Discussion | null,
   text: string,
@@ -373,6 +376,7 @@ export type ModelElementDiscussedConnection = {
 
 export type UpdateElementDiscussedInput = {
   id: string,
+  elementId?: string | null,
   discussionId?: string | null,
   text?: string | null,
   createdAt?: string | null,
@@ -516,6 +520,7 @@ export type ModelMemberFilterInput = {
 
 export type ModelElementDiscussedFilterInput = {
   id?: ModelIDInput | null,
+  elementId?: ModelIDInput | null,
   discussionId?: ModelIDInput | null,
   text?: ModelStringInput | null,
   createdAt?: ModelStringInput | null,
@@ -1057,7 +1062,8 @@ export type CreateElementDiscussedMutation = {
   createElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -1073,7 +1079,7 @@ export type CreateElementDiscussedMutation = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -1141,7 +1147,8 @@ export type UpdateElementDiscussedMutation = {
   updateElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -1157,7 +1164,7 @@ export type UpdateElementDiscussedMutation = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -1225,7 +1232,8 @@ export type DeleteElementDiscussedMutation = {
   deleteElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -1241,7 +1249,7 @@ export type DeleteElementDiscussedMutation = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -1375,6 +1383,7 @@ export type CreateDiscussionMutation = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -1462,6 +1471,7 @@ export type UpdateDiscussionMutation = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -1549,6 +1559,7 @@ export type DeleteDiscussionMutation = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -1873,7 +1884,8 @@ export type GetElementDiscussedQuery = {
   getElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -1889,7 +1901,7 @@ export type GetElementDiscussedQuery = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -1960,7 +1972,8 @@ export type ListElementDiscussedsQuery = {
     items:  Array< {
       __typename: "ElementDiscussed",
       id: string,
-      element:  {
+      elementId: string,
+      element?:  {
         __typename: "Element",
         id: string,
         templateId: string,
@@ -1968,7 +1981,7 @@ export type ListElementDiscussedsQuery = {
         order: number,
         createdAt: string,
         updatedAt?: string | null,
-      },
+      } | null,
       discussionId: string,
       discussion?:  {
         __typename: "Discussion",
@@ -2068,6 +2081,7 @@ export type GetDiscussionQuery = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -2571,7 +2585,8 @@ export type OnCreateElementDiscussedSubscription = {
   onCreateElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -2587,7 +2602,7 @@ export type OnCreateElementDiscussedSubscription = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -2650,7 +2665,8 @@ export type OnUpdateElementDiscussedSubscription = {
   onUpdateElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -2666,7 +2682,7 @@ export type OnUpdateElementDiscussedSubscription = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -2729,7 +2745,8 @@ export type OnDeleteElementDiscussedSubscription = {
   onDeleteElementDiscussed?:  {
     __typename: "ElementDiscussed",
     id: string,
-    element:  {
+    elementId: string,
+    element?:  {
       __typename: "Element",
       id: string,
       templateId: string,
@@ -2745,7 +2762,7 @@ export type OnDeleteElementDiscussedSubscription = {
       order: number,
       createdAt: string,
       updatedAt?: string | null,
-    },
+    } | null,
     discussionId: string,
     discussion?:  {
       __typename: "Discussion",
@@ -2874,6 +2891,7 @@ export type OnCreateDiscussionSubscription = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -2956,6 +2974,7 @@ export type OnUpdateDiscussionSubscription = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,
@@ -3038,6 +3057,7 @@ export type OnDeleteDiscussionSubscription = {
       items:  Array< {
         __typename: "ElementDiscussed",
         id: string,
+        elementId: string,
         discussionId: string,
         text: string,
         createdAt: string,

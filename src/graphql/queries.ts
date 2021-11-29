@@ -255,6 +255,7 @@ export const getElementDiscussed = /* GraphQL */ `
   query GetElementDiscussed($id: ID!) {
     getElementDiscussed(id: $id) {
       id
+      elementId
       element {
         id
         templateId
@@ -335,6 +336,7 @@ export const listElementDiscusseds = /* GraphQL */ `
     ) {
       items {
         id
+        elementId
         element {
           id
           templateId
@@ -427,6 +429,7 @@ export const getDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt

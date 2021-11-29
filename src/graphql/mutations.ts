@@ -435,6 +435,7 @@ export const createElementDiscussed = /* GraphQL */ `
   ) {
     createElementDiscussed(input: $input, condition: $condition) {
       id
+      elementId
       element {
         id
         templateId
@@ -509,6 +510,7 @@ export const updateElementDiscussed = /* GraphQL */ `
   ) {
     updateElementDiscussed(input: $input, condition: $condition) {
       id
+      elementId
       element {
         id
         templateId
@@ -583,6 +585,7 @@ export const deleteElementDiscussed = /* GraphQL */ `
   ) {
     deleteElementDiscussed(input: $input, condition: $condition) {
       id
+      elementId
       element {
         id
         templateId
@@ -713,6 +716,7 @@ export const createDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt
@@ -788,6 +792,7 @@ export const updateDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt
@@ -863,6 +868,7 @@ export const deleteDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt

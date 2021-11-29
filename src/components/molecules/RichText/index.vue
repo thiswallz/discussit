@@ -1,17 +1,14 @@
 <template>
-  <div>
-    Text fields:
-    <quill-editor theme="snow"></quill-editor>
-
-    <slot></slot>
-  </div>
+    <quill-editor theme="snow" :content="content" content-type="html"></quill-editor>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  props: {},
+  props: {
+    content: { type: String },
+  },
 });
 </script>
 

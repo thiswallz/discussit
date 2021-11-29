@@ -387,6 +387,7 @@ export const onCreateElementDiscussed = /* GraphQL */ `
   subscription OnCreateElementDiscussed {
     onCreateElementDiscussed {
       id
+      elementId
       element {
         id
         templateId
@@ -458,6 +459,7 @@ export const onUpdateElementDiscussed = /* GraphQL */ `
   subscription OnUpdateElementDiscussed {
     onUpdateElementDiscussed {
       id
+      elementId
       element {
         id
         templateId
@@ -529,6 +531,7 @@ export const onDeleteElementDiscussed = /* GraphQL */ `
   subscription OnDeleteElementDiscussed {
     onDeleteElementDiscussed {
       id
+      elementId
       element {
         id
         templateId
@@ -656,6 +659,7 @@ export const onCreateDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt
@@ -728,6 +732,7 @@ export const onUpdateDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt
@@ -800,6 +805,7 @@ export const onDeleteDiscussion = /* GraphQL */ `
       elements {
         items {
           id
+          elementId
           discussionId
           text
           createdAt

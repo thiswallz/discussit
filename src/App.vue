@@ -8,12 +8,17 @@
       <div>
         list
         <ol v-if="selectedStatus">
-          <li v-for="(discussion, index) in selectedStatus.discussions" :key="index">
+          <li v-for="(discussion, index) in selectedStatus.discussions" :key="index" @click="()=>selectDiscussion(discussion)">
             {{discussion.title}}
           </li>
         </ol>
       </div>
-      <rich-text class=""></rich-text>
+      <div v-if="selectedDiscussion">
+        <div v-for="(element, index) in elements" :key="index">
+         {{element.title}}: 
+          <rich-text :content="elementDiscussion(element.id)"></rich-text>
+        </div>
+      </div>
     </div>
   </div>
   <powered-list
@@ -28,13 +33,13 @@
 </template>
 
 <script lang="ts">
-import { computed, Ref, ref, watch } from 'vue';
+import { computed, onMounted, Ref, ref, watch } from 'vue';
 import { API } from 'aws-amplify';
-import { getTemplate, listDiscussions, listTemplates } from './graphql/queries';
+import { getDiscussion, getTemplate, listDiscussions, listTemplates } from './graphql/queries';
 import StatusesBar from './components/organisms/StatusesBar/index.vue';
 import PoweredList from './components/organisms/PoweredList/index.vue';
 import RichText from './components/molecules/RichText/index.vue';
-import { Template, Status, Discussion } from './API';
+import { Template, Status, Discussion, Element } from './API';
 
 export interface StatusEnriched extends Status {
   discussions: Partial<Discussion>[];
@@ -45,8 +50,10 @@ export default {
   setup() {
     let templates: Ref<Template[]> = ref([]);
     let statuses: Ref<StatusEnriched[]> = ref([]);
+    let elements: Ref<Element[]> = ref([]);
     let selectedTemplate: Ref<Template | undefined> = ref(undefined);
     let selectedStatus: Ref<StatusEnriched | undefined> = ref(undefined);
+    let selectedDiscussion: Ref<Discussion | undefined> = ref(undefined);
     const defaultTemplate = computed((): Template | undefined =>
       templates.value.find((template) => template.isDefault)
     );
@@ -57,10 +64,28 @@ export default {
       });
       templates.value = result.data.listTemplates.items;
     };
-    loadTemplates();
-    
+
+    const elementDiscussion = (id: string) => {
+      if(selectedDiscussion.value){
+      console.log(selectedDiscussion.value.elements?.items?.find(item => item.elementId === id), id)
+        return  selectedDiscussion.value.elements?.items?.find(item => item.elementId === id)?.text
+      }
+    }
+
     const selectStatus = async (status: StatusEnriched) => {
       selectedStatus.value = status
+    };
+
+    const selectDiscussion = async (discussion: Discussion) => {
+      //selectedDiscussion.value = discussion
+      const response = await <any>API.graphql({
+        query: getDiscussion,
+        variables: {
+          id: discussion.id,
+        },
+      });
+      selectedDiscussion.value = response.data.getDiscussion
+      console.log('response>> ', response.data.getDiscussion)
     };
 
     const enrichStatuses = async (statuses: Status[]) => {
@@ -103,21 +128,33 @@ export default {
             id: templateId,
           },
         });
-        // TODO get elements
         statuses.value = await enrichStatuses(response.data.getTemplate.statuses.items);
+        elements.value = response.data.getTemplate.elements.items;
         if(statuses.value && statuses.value.length > 0){
           selectStatus(statuses.value[0])
         }
       }
     });
 
+    watch(selectedStatus, () => {
+      selectedDiscussion.value = undefined
+    });
+
+    onMounted(() => {
+      loadTemplates();
+    })
+
     return {
       templates,
       statuses,
+      elements,
       selectedTemplate,
       selectedStatus,
+      selectedDiscussion,
       defaultTemplate,
       selectStatus,
+      selectDiscussion,
+      elementDiscussion
     };
   },
 };

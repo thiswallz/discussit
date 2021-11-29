@@ -49,7 +49,8 @@ type Member @model @key(name: "byMember", fields: ["teamId"]) {
 
 type ElementDiscussed @model @key(name: "byElement", fields: ["discussionId"]) {
   id: ID!
-  element: Element!
+  elementId: ID!
+  element: Element  @connection(fields: ["elementId"])
   discussionId: ID!
   discussion: Discussion @connection(fields: ["discussionId"])
   text: String!

@@ -2,7 +2,9 @@
   <div class="text-4xlk absolute top-3 left-5">Hello 👋🏼</div>
   <div class="mt-3 grid grid-flow-row grid-cols-1">
     <div class="">
-      <statuses-bar :statuses="statuses" @select="select"></statuses-bar>
+      <statuses-bar :statuses="statuses" @select="select">
+        
+      </statuses-bar>
     </div>
     <div>
       <rich-text class=""></rich-text>

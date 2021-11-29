@@ -1,9 +1,11 @@
 type Template @model {
-    id: ID!
-    name: String!
-    isDefault: Boolean!
-    statuses: [Status] @connection(keyName: "byTemplate", fields: ["id"])
-    elements: [Element] @connection(keyName: "byElement", fields: ["id"])
+  id: ID!
+  name: String!
+  isDefault: Boolean!
+  statuses: [Status] @connection(keyName: "byTemplate", fields: ["id"])
+  elements: [Element] @connection(keyName: "byElement", fields: ["id"])
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
 type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
@@ -14,6 +16,8 @@ type Status @model @key(name: "byTemplate", fields: ["templateId"]) {
   color: String!
   icon: String!
   order: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
 type Element @model @key(name: "byElement", fields: ["templateId"]) {
@@ -22,12 +26,16 @@ type Element @model @key(name: "byElement", fields: ["templateId"]) {
   template: Template @connection(fields: ["templateId"])
   title: String!
   order: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
 type Team @model {
   id: ID!
   name: String!
   members: [Member] @connection(keyName: "byMember", fields: ["id"])
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
 type Member @model @key(name: "byMember", fields: ["teamId"]) {
@@ -35,13 +43,19 @@ type Member @model @key(name: "byMember", fields: ["teamId"]) {
   teamId: ID!
   team: Team @connection(fields: ["teamId"])
   name: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
-type ElementDiscussed @model {
+type ElementDiscussed @model @key(name: "byElement", fields: ["discussionId"]) {
   id: ID!
   element: Element!
   discussion: Discussion!
+  discussionId: ID!
+  discussion: Discussion @connection(fields: ["discussionId"])
   text: String!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime
 }
 
 type Discussion @model {
@@ -55,9 +69,9 @@ type Discussion @model {
   owners: [String]
   checklist: [String]
   peopleInvolved: [String]
-  dateProposed: String 
-  dateProposedGranularity: String 
+  dateProposed: String
+  dateProposedGranularity: String
+  elements: [ElementDiscussed] @connection(keyName: "byElement", fields: ["id"])
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime
 }
-

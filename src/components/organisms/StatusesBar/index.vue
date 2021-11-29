@@ -1,17 +1,20 @@
 <template>
-    <RoadLine
-      :lines="statuses"
-      :box-classes="['flex-1']"
-      class="w-full pl-5 pr-5"
-      @onBoxClick="(line) => $emit('select', line)"
-      single-line
-    >
+  <RoadLine
+    :lines="statuses"
+    :box-classes="['flex-1']"
+    class="w-full pl-5 pr-5"
+    @onBoxClick="(line) => $emit('select', line)"
+    single-line
+  >
     <template #header="{ item }">
-      <font-awesome-icon :icon="item.icon" class="absolute top-5 left-1/2 transform -translate-x-1/2" />
-      {{item.title}}
+      <font-awesome-icon
+        :icon="item.icon"
+        class="absolute top-5 left-1/2 transform -translate-x-1/2"
+      />
+      {{ item.title }}
     </template>
-      <template v-slot:default="slotProps">
-        <div>My textsssss {{ slotProps.title }}</div>
+    <template #default>
+      <div class="flex ml-5 mb-5">
         <Diamond />
         <Diamond />
         <Diamond />
@@ -19,8 +22,9 @@
         <Diamond />
         <Diamond />
         <Diamond />
-      </template>
-    </RoadLine>
+      </div>
+    </template>
+  </RoadLine>
 </template>
 
 <script lang="ts">
@@ -35,7 +39,7 @@ export default defineComponent({
   },
   props: {
     statuses: { type: Array },
-  }
+  },
 });
 </script>
 

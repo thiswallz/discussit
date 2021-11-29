@@ -1,5 +1,8 @@
 <template>
-  <div :class="{ 'flex w-auto single-line': singleLine, 'mt-10': $slots.header }" class="road-line">
+  <div
+    :class="{ 'flex w-auto single-line': singleLine, 'mt-10': $slots.header }"
+    class="road-line"
+  >
     <template v-for="(item, index) in lines" :key="index">
       <box
         :title="$slots.header ? null : item.title"
@@ -24,7 +27,7 @@ import VCircle from '@/components/atoms/VCircle/index.vue';
 export default defineComponent({
   components: {
     Box,
-    VCircle
+    VCircle,
   },
   props: {
     lines: { type: Object },
@@ -33,22 +36,22 @@ export default defineComponent({
   },
   data() {
     return {
-      indexSelected: 0
-    }
+      indexSelected: 0,
+    };
   },
   methods: {
-    select(item: any, index: number){
-      this.indexSelected = index
-      this.$emit('onBoxClick', item)
-    }
-  }
+    select(item: any, index: number) {
+      this.indexSelected = index;
+      this.$emit('onBoxClick', item);
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
 .road-line {
-  .box{
-    ::v-deep .circle{
+  .box {
+    ::v-deep .circle {
       @apply absolute left-1/2 transform -translate-x-1/2;
     }
   }

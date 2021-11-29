@@ -50,7 +50,6 @@ type Member @model @key(name: "byMember", fields: ["teamId"]) {
 type ElementDiscussed @model @key(name: "byElement", fields: ["discussionId"]) {
   id: ID!
   element: Element!
-  discussion: Discussion!
   discussionId: ID!
   discussion: Discussion @connection(fields: ["discussionId"])
   text: String!
@@ -58,16 +57,24 @@ type ElementDiscussed @model @key(name: "byElement", fields: ["discussionId"]) {
   updatedAt: AWSDateTime
 }
 
+type CheckItem {
+  title: String!
+  checked: Boolean!
+}
+
 type Discussion @model {
   id: ID!
   title: String!
   priority: String!
-  status: Status!
-  team: Team!
-  template: Template!
+  statusId: ID!
+  status: Status @connection(fields: ["statusId"])
+  teamId: ID!
+  team: Team @connection(fields: ["teamId"])
+  templateId: ID!
+  template: Template @connection(fields: ["templateId"])
   labels: [String]
   owners: [String]
-  checklist: [String]
+  checklist: [CheckItem]
   peopleInvolved: [String]
   dateProposed: String
   dateProposedGranularity: String

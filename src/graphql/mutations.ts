@@ -450,10 +450,12 @@ export const createElementDiscussed = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      discussionId
       discussion {
         id
         title
         priority
+        statusId
         status {
           id
           templateId
@@ -464,12 +466,14 @@ export const createElementDiscussed = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        teamId
         team {
           id
           name
           createdAt
           updatedAt
         }
+        templateId
         template {
           id
           name
@@ -479,10 +483,16 @@ export const createElementDiscussed = /* GraphQL */ `
         }
         labels
         owners
-        checklist
+        checklist {
+          title
+          checked
+        }
         peopleInvolved
         dateProposed
         dateProposedGranularity
+        elements {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -514,10 +524,12 @@ export const updateElementDiscussed = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      discussionId
       discussion {
         id
         title
         priority
+        statusId
         status {
           id
           templateId
@@ -528,12 +540,14 @@ export const updateElementDiscussed = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        teamId
         team {
           id
           name
           createdAt
           updatedAt
         }
+        templateId
         template {
           id
           name
@@ -543,10 +557,16 @@ export const updateElementDiscussed = /* GraphQL */ `
         }
         labels
         owners
-        checklist
+        checklist {
+          title
+          checked
+        }
         peopleInvolved
         dateProposed
         dateProposedGranularity
+        elements {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -578,10 +598,12 @@ export const deleteElementDiscussed = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      discussionId
       discussion {
         id
         title
         priority
+        statusId
         status {
           id
           templateId
@@ -592,12 +614,14 @@ export const deleteElementDiscussed = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        teamId
         team {
           id
           name
           createdAt
           updatedAt
         }
+        templateId
         template {
           id
           name
@@ -607,10 +631,16 @@ export const deleteElementDiscussed = /* GraphQL */ `
         }
         labels
         owners
-        checklist
+        checklist {
+          title
+          checked
+        }
         peopleInvolved
         dateProposed
         dateProposedGranularity
+        elements {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -629,6 +659,7 @@ export const createDiscussion = /* GraphQL */ `
       id
       title
       priority
+      statusId
       status {
         id
         templateId
@@ -646,6 +677,7 @@ export const createDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      teamId
       team {
         id
         name
@@ -655,6 +687,7 @@ export const createDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      templateId
       template {
         id
         name
@@ -670,10 +703,23 @@ export const createDiscussion = /* GraphQL */ `
       }
       labels
       owners
-      checklist
+      checklist {
+        title
+        checked
+      }
       peopleInvolved
       dateProposed
       dateProposedGranularity
+      elements {
+        items {
+          id
+          discussionId
+          text
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -688,6 +734,7 @@ export const updateDiscussion = /* GraphQL */ `
       id
       title
       priority
+      statusId
       status {
         id
         templateId
@@ -705,6 +752,7 @@ export const updateDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      teamId
       team {
         id
         name
@@ -714,6 +762,7 @@ export const updateDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      templateId
       template {
         id
         name
@@ -729,10 +778,23 @@ export const updateDiscussion = /* GraphQL */ `
       }
       labels
       owners
-      checklist
+      checklist {
+        title
+        checked
+      }
       peopleInvolved
       dateProposed
       dateProposedGranularity
+      elements {
+        items {
+          id
+          discussionId
+          text
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -747,6 +809,7 @@ export const deleteDiscussion = /* GraphQL */ `
       id
       title
       priority
+      statusId
       status {
         id
         templateId
@@ -764,6 +827,7 @@ export const deleteDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      teamId
       team {
         id
         name
@@ -773,6 +837,7 @@ export const deleteDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      templateId
       template {
         id
         name
@@ -788,10 +853,23 @@ export const deleteDiscussion = /* GraphQL */ `
       }
       labels
       owners
-      checklist
+      checklist {
+        title
+        checked
+      }
       peopleInvolved
       dateProposed
       dateProposedGranularity
+      elements {
+        items {
+          id
+          discussionId
+          text
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }

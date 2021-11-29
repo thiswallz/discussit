@@ -2,11 +2,17 @@
   <div class="text-4xlk absolute top-3 left-5">Hello 👋🏼</div>
   <div class="mt-3 grid grid-flow-row grid-cols-1">
     <div class="">
-      <statuses-bar :statuses="statuses" @select="select">
-        
-      </statuses-bar>
+      <statuses-bar :statuses="statuses" @select="selectStatus"></statuses-bar>
     </div>
-    <div>
+    <div class="mt-3 grid grid-flow-row grid-cols-2">
+      <div>
+        list
+        <ol v-if="selectedStatus">
+          <li v-for="(discussion, index) in selectedStatus.discussions" :key="index">
+            {{discussion.title}}
+          </li>
+        </ol>
+      </div>
       <rich-text class=""></rich-text>
     </div>
   </div>
@@ -24,18 +30,23 @@
 <script lang="ts">
 import { computed, Ref, ref, watch } from 'vue';
 import { API } from 'aws-amplify';
-import { listStatuss, listTemplates } from './graphql/queries';
+import { getTemplate, listDiscussions, listTemplates } from './graphql/queries';
 import StatusesBar from './components/organisms/StatusesBar/index.vue';
 import PoweredList from './components/organisms/PoweredList/index.vue';
 import RichText from './components/molecules/RichText/index.vue';
-import { Template, Status } from './API';
+import { Template, Status, Discussion } from './API';
+
+export interface StatusEnriched extends Status {
+  discussions: Partial<Discussion>[];
+}
 
 export default {
   components: { StatusesBar, PoweredList, RichText },
   setup() {
     let templates: Ref<Template[]> = ref([]);
-    let statuses: Ref<Status[]> = ref([]);
+    let statuses: Ref<StatusEnriched[]> = ref([]);
     let selectedTemplate: Ref<Template | undefined> = ref(undefined);
+    let selectedStatus: Ref<StatusEnriched | undefined> = ref(undefined);
     const defaultTemplate = computed((): Template | undefined =>
       templates.value.find((template) => template.isDefault)
     );
@@ -47,6 +58,35 @@ export default {
       templates.value = result.data.listTemplates.items;
     };
     loadTemplates();
+    
+    const selectStatus = async (status: StatusEnriched) => {
+      selectedStatus.value = status
+    };
+
+    const enrichStatuses = async (statuses: Status[]) => {
+      let statusesEnriched: StatusEnriched[] = []
+
+      for (let i = 0; i < statuses.length; i++) {
+        const response = await <any>API.graphql({
+          query: listDiscussions,
+          variables: {
+            filter: {
+              statusId: {
+                eq: statuses[i].id,
+              },
+            },
+          },
+        });
+        statusesEnriched = [ 
+          ...statusesEnriched, 
+          {
+            ...statuses[i], 
+            discussions: response.data.listDiscussions.items
+          }
+        ]
+      }
+      return statusesEnriched 
+    }
 
     watch(templates, () => {
       if (!selectedTemplate.value && defaultTemplate.value) {
@@ -58,29 +98,26 @@ export default {
       const templateId = newVal ? newVal?.id : defaultTemplate?.value?.id;
       if (templateId) {
         const response = await <any>API.graphql({
-          query: listStatuss,
+          query: getTemplate,
           variables: {
-            filter: {
-              templateId: {
-                eq: templateId,
-              },
-            },
+            id: templateId,
           },
         });
-        statuses.value = response.data.listStatuss.items;
+        // TODO get elements
+        statuses.value = await enrichStatuses(response.data.getTemplate.statuses.items);
+        if(statuses.value && statuses.value.length > 0){
+          selectStatus(statuses.value[0])
+        }
       }
     });
-
-    const select = (status: Status) => {
-      console.log('selectedd>>> ', status);
-    };
 
     return {
       templates,
       statuses,
       selectedTemplate,
+      selectedStatus,
       defaultTemplate,
-      select,
+      selectStatus,
     };
   },
 };

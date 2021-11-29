@@ -13,15 +13,9 @@
       />
       {{ item.title }}
     </template>
-    <template #default>
-      <div class="flex ml-5 mb-5">
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
-        <Diamond />
+    <template #default="{ item }">
+      <div class="flex ml-5 mb-5" v-if="item && item.discussions">
+        <Diamond v-for="(discussion, index) in item.discussions" :key="index" class="ml-1"/>
       </div>
     </template>
   </RoadLine>

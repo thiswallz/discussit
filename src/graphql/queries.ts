@@ -270,10 +270,12 @@ export const getElementDiscussed = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      discussionId
       discussion {
         id
         title
         priority
+        statusId
         status {
           id
           templateId
@@ -284,12 +286,14 @@ export const getElementDiscussed = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        teamId
         team {
           id
           name
           createdAt
           updatedAt
         }
+        templateId
         template {
           id
           name
@@ -299,10 +303,16 @@ export const getElementDiscussed = /* GraphQL */ `
         }
         labels
         owners
-        checklist
+        checklist {
+          title
+          checked
+        }
         peopleInvolved
         dateProposed
         dateProposedGranularity
+        elements {
+          nextToken
+        }
         createdAt
         updatedAt
       }
@@ -333,13 +343,16 @@ export const listElementDiscusseds = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        discussionId
         discussion {
           id
           title
           priority
+          statusId
+          teamId
+          templateId
           labels
           owners
-          checklist
           peopleInvolved
           dateProposed
           dateProposedGranularity
@@ -360,6 +373,7 @@ export const getDiscussion = /* GraphQL */ `
       id
       title
       priority
+      statusId
       status {
         id
         templateId
@@ -377,6 +391,7 @@ export const getDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      teamId
       team {
         id
         name
@@ -386,6 +401,7 @@ export const getDiscussion = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      templateId
       template {
         id
         name
@@ -401,10 +417,23 @@ export const getDiscussion = /* GraphQL */ `
       }
       labels
       owners
-      checklist
+      checklist {
+        title
+        checked
+      }
       peopleInvolved
       dateProposed
       dateProposedGranularity
+      elements {
+        items {
+          id
+          discussionId
+          text
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       createdAt
       updatedAt
     }
@@ -421,6 +450,7 @@ export const listDiscussions = /* GraphQL */ `
         id
         title
         priority
+        statusId
         status {
           id
           templateId
@@ -431,12 +461,14 @@ export const listDiscussions = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        teamId
         team {
           id
           name
           createdAt
           updatedAt
         }
+        templateId
         template {
           id
           name
@@ -446,10 +478,16 @@ export const listDiscussions = /* GraphQL */ `
         }
         labels
         owners
-        checklist
+        checklist {
+          title
+          checked
+        }
         peopleInvolved
         dateProposed
         dateProposedGranularity
+        elements {
+          nextToken
+        }
         createdAt
         updatedAt
       }

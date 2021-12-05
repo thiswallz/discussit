@@ -14,8 +14,15 @@
       {{ item.title }}
     </template>
     <template #default="{ item }">
-      <div class="flex ml-5 mb-5" v-if="item && item.discussions">
-        <Diamond v-for="(discussion, index) in item.discussions" :key="index" class="ml-1"/>
+      <div
+        class="flex flex-row flex-wrap ml-4 mb-4"
+        v-if="item && item.discussions"
+      >
+        <Diamond
+          v-for="(discussion, index) in item.discussions"
+          :key="index"
+          class="ml-1"
+        />
       </div>
     </template>
   </RoadLine>
@@ -37,4 +44,16 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+::v-deep {
+  .bg-gradient-default {
+    background-image: none;
+  }
+  .box {
+    .box--content {
+      @apply mt-8;
+      color:red;
+    }
+  }
+}
+</style>

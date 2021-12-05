@@ -3,6 +3,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .h-130{
+    height: 130px;
+  }
+  .h-content{
+    height: calc(100vh - 130px);
+  }
+}
+
 :root {
   --color: rgb(255, 255, 255);
   --main-color: rgb(1, 110, 218);
@@ -26,5 +35,6 @@ body {
   );
   background-position: center top;
   background-size: 100% auto;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 }

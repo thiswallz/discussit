@@ -1,12 +1,18 @@
 import { ref, Ref, watch } from 'vue';
 import { API } from 'aws-amplify';
 import { getDiscussion } from '@/graphql/queries';
-import { Discussion, ElementDiscussed } from '@/API';
-import { createElementDiscussed, updateElementDiscussed } from '@/graphql/mutations';
+import { Discussion, ElementDiscussed, Template} from '@/API';
+import { createDiscussion, createElementDiscussed, updateElementDiscussed } from '@/graphql/mutations';
 import { StatusEnriched } from './useStatus';
 
-export default function useDiscussions(initialValue: Discussion | undefined, selectedStatus: Ref<StatusEnriched | undefined>) {
+export default function useDiscussions(
+		initialValue: Discussion | undefined, 
+		selectedStatus: Ref<StatusEnriched | undefined>, 
+		teamId: string,
+		selectedTemplate: Ref<Template | undefined>
+	) {
 	const selectedDiscussion: Ref<Discussion | undefined> = ref(initialValue);
+	const selectedDiscussionIndex: Ref<number | undefined> = ref(undefined);
 
 	const elementDiscussion = (id: string) => {
 		if(selectedDiscussion.value){
@@ -57,12 +63,28 @@ export default function useDiscussions(initialValue: Discussion | undefined, sel
 			});
 			if(selectedDiscussion.value){
 				// reload discussions
-				selectDiscussion(selectedDiscussion.value) 
+				selectDiscussion(selectedDiscussion.value, 0) 
 			}
 		}
 	}
 
-	const selectDiscussion = async (discussion: Discussion) => {
+	const addDiscussion = async () => {
+		await <Promise<{data: {createDiscussion: Discussion}}>>API.graphql({
+			query: createDiscussion,
+			variables: { 
+				input: {
+					title: 'Modify title...',
+					priority: 'low',
+					statusId: selectedStatus.value?.id,
+					teamId,
+					templateId: selectedTemplate.value?.id,
+				}
+			},
+		});
+	}
+
+	const selectDiscussion = async (discussion: Discussion, index: number) => {
+		selectedDiscussionIndex.value = index
 		const response = await <any>API.graphql({
 			query: getDiscussion,
 			variables: {
@@ -78,8 +100,10 @@ export default function useDiscussions(initialValue: Discussion | undefined, sel
 
   return {
     selectedDiscussion,
+		selectedDiscussionIndex,
 		elementDiscussion,
 		updateDiscussionElement,
-		selectDiscussion
+		selectDiscussion,
+		addDiscussion
   };
 }
